@@ -8,6 +8,9 @@ aantalBakjes = 0
 berekeningBakje = 0
 berekeningBolletjes = 0
 berekeningHorrentje = 0
+berekeningSprinkels = 0
+berekeningSlagroom = 0
+prijsCaramel = 0
 
 def stap1():
     aantalBollen =input('Hoeveel bolletjes wilt u? ')
@@ -63,18 +66,32 @@ def stap2(aantalBollen):
         else:
             global aantalBakjes
             aantalBakjes +=1
+        topping(keuze, aantalBollen)
         stap3(keuze, aantalBollen)
         hoornBak(keuze)
     else:
         print('Sorry dat snap ik niet... ')
         stap2(aantalBollen)     
 
-def bon(aantalBollen, aantalBakjes, aantalHoorntjes, keuze):
+def topping(keuze, aantalBollen):
+    global toppingKeuze
+    toppingKeuze = input('Wat voor topping wilt u: A Geen, B Slagroom, C Sprinkels of D Caramel Saus? ').lower()
+    stap3(keuze, aantalBollen)
+            
+
+def bon(aantalBollen, aantalBakjes, aantalHoorntjes, keuze, topping):
     prijsBolletjes = float(1.10)
     prijsHorrentje = float(1.25)
     prijsBakjes = float(0.75)
+    prijsSlagroom = float(0.50)
+    prijsSprinkels = float(0.30) 
+    
     global berekeningBakje
     global berekeningHorrentje
+    global berekeningSprinkels
+    global berekeningSlagroom
+    global prijsCaramel
+
     print('\n------------[ Papi Gelato ]------------\n')
     berekeningBolletjes = round(float(aantalBollen)) * float(prijsBolletjes) 
     print('Bolletjes     =  ' + str(aantalBollen) + ' x ' + '€' + str(prijsBolletjes) + '  = ' + '€' + str(berekeningBolletjes))
@@ -86,7 +103,22 @@ def bon(aantalBollen, aantalBakjes, aantalHoorntjes, keuze):
     if aantalBakjes > 0:
         berekeningBakje = round(float(aantalBakjes)) * str(prijsBakjes)
         print('Bakje         =  ' + str(aantalBakjes) + ' x ' + '€' + str(prijsBakjes) + ' = ' + '€' + str(berekeningBakje))
-    eindbedragCalc = float(berekeningBolletjes) + float(berekeningBakje) + float(berekeningHorrentje)
+    if toppingKeuze == 'b':
+        berekeningSlagroom = float(prijsSlagroom) * float(aantalBakjes or aantalHoorntjes)
+        print('Topping Slagroom      =  ' + str(aantalHoorntjes or aantalBakjes) + ' x ' + str(prijsSlagroom) + '   = ' + str(berekeningSlagroom))
+    if toppingKeuze == 'c':
+        berekeningSprinkels = float(prijsSprinkels) * float(aantalBollen)
+        print('Topping Sprinkels     =  ' + str(aantalBollen) + ' x ' + str(prijsSprinkels) + '  = ' + str(berekeningSprinkels))
+    if toppingKeuze == 'd':
+        if keuze == 'a':
+            prijsCaramel += 0.60
+        elif keuze == 'b':
+            prijsCaramel += 0.90
+        berekeningCaramel = float(prijsCaramel) * float(aantalBakjes or aantalHoorntjes) 
+        print('Topping Caramel       =  ' + str(aantalBakjes or aantalHoorntjes) + ' x ' + str(berekeningCaramel))
+    
+    
+    eindbedragCalc = float(berekeningBolletjes) + float(berekeningBakje) + float(berekeningHorrentje) + float(berekeningSlagroom) + float(berekeningSprinkels)
     print('\n                           ------------\n')
     print('Totaal                     = ' + str(eindbedragCalc))  
 
@@ -95,7 +127,7 @@ def stap3(keuze, aantalBollen):
     if bijbestellen == 'y':
         stap1()
     elif bijbestellen == 'n':
-        bon(aantalBollen, aantalBakjes, aantalHoorntjes, keuze)
+        bon(aantalBollen, aantalBakjes, aantalHoorntjes, keuze, topping)
         print('\nBedankt en tot ziens!\n')
     else:
         print('Sorry dat snap ik niet...')
