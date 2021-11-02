@@ -12,6 +12,38 @@ berekeningSprinkels = 0
 berekeningSlagroom = 0
 prijsCaramel = 0
 
+def soortKlant():
+    keuzeKlant = input('Bent u 1 particulier of 2 zakelijk? ')
+    if keuzeKlant == '1':
+        stap1()
+    elif keuzeKlant == '2':
+        aantalLiter = input('Hoeveel liter wilt u bestellen? ')
+        smaakZakelijk(keuzeKlant, aantalLiter)
+    else:
+        print('Sorry dat snap ik niet... ')
+        soortKlant()
+
+def smaakZakelijk(keuzeKlant, aantalLiter):   
+    y = 0
+    while y < int(aantalLiter):
+            y += 1
+            smaakLiter =input('Welke smaak wilt u voor u ' + str(y) +'e liter? A Aardbei, C Chocolade, M Munt of V Vanille? ')
+            if smaakLiter != 'a' and smaakLiter != 'c' and smaakLiter != 'm' and smaakLiter != 'v':
+                y -= 1
+                print('Sorry dat snap ik niet... ')
+                
+    bonZakelijk(aantalLiter)
+
+def bonZakelijk(aantalLiter):
+    print('\n------------[ Papi Gelato ]------------\n')
+    prijsLiter = float(9.80)
+    berekeningLiters = float(prijsLiter) * float(aantalLiter)
+    berekeningBtw = round(float(berekeningLiters)) / 100 * 9
+    print('Liter            ' + str(aantalLiter) + ' x ' + str(prijsLiter) + ' =  ' + '€' + str(berekeningLiters))
+    print('                            -----')
+    print(f'Totaal                   =  €{round(berekeningLiters)}')
+    print(f'BTW (9%)                 =  €{round(berekeningBtw)}')
+
 def stap1():
     aantalBollen =input('Hoeveel bolletjes wilt u? ')
     if aantalBollen.isdigit() == False:
@@ -133,4 +165,4 @@ def stap3(keuze, aantalBollen):
         print('Sorry dat snap ik niet...')
         stap3(keuze, aantalBollen)
 
-stap1()
+soortKlant()
