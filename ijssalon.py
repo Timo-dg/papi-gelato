@@ -20,17 +20,17 @@ def soortKlant():
         aantalLiter = input('Hoeveel liter wilt u bestellen? ')
         smaakZakelijk(keuzeKlant, aantalLiter)
     else:
-        print('Sorry dat snap ik niet... ')
+        print('Sorry dat is geen optie die we aanbieden...')
         soortKlant()
 
 def smaakZakelijk(keuzeKlant, aantalLiter):   
     y = 0
     while y < int(aantalLiter):
             y += 1
-            smaakLiter =input('Welke smaak wilt u voor u ' + str(y) +'e liter? A Aardbei, C Chocolade, M Munt of V Vanille? ')
-            if smaakLiter != 'a' and smaakLiter != 'c' and smaakLiter != 'm' and smaakLiter != 'v':
+            smaakLiter =input('Welke smaak wilt u voor u ' + str(y) +'e liter? A Aardbei, C Chocolade of V Vanille? ')
+            if smaakLiter != 'a' and smaakLiter != 'c' and smaakLiter != 'v':
                 y -= 1
-                print('Sorry dat snap ik niet... ')
+                print('Sorry dat is geen optie die we aanbieden...')
                 
     bonZakelijk(aantalLiter)
 
@@ -38,11 +38,11 @@ def bonZakelijk(aantalLiter):
     print('\n------------[ Papi Gelato ]------------\n')
     prijsLiter = float(9.80)
     berekeningLiters = float(prijsLiter) * float(aantalLiter)
-    berekeningBtw = round(float(berekeningLiters)) / 100 * 9
+    berekeningBtw = round(float(berekeningLiters)) / 100 * 6
     print('Liter            ' + str(aantalLiter) + ' x ' + str(prijsLiter) + ' =  ' + '€' + str(berekeningLiters))
     print('                            -----')
     print(f'Totaal                   =  €{round(berekeningLiters)}')
-    print(f'BTW (9%)                 =  €{round(berekeningBtw)}')
+    print(f'BTW (6%)                 =  €{round(berekeningBtw)}')
 
 def stap1():
     aantalBollen =input('Hoeveel bolletjes wilt u? ')
@@ -71,10 +71,10 @@ def smaken(aantalBollen):
     x = 0
     while x < int(aantalBollen):
         x += 1
-        keuzeSmaak =input('Welke smaak wilt u voor bolletje nummer ' + str(x) + ' ? A Aardbei, C Chocolade, M Munt of V Vanille? ').lower()
-        if keuzeSmaak != 'a' and keuzeSmaak != 'c' and keuzeSmaak != 'm' and keuzeSmaak != 'v':
+        keuzeSmaak =input('Welke smaak wilt u voor bolletje nummer ' + str(x) + ' ? A Aardbei, C Chocolade of V Vanille? ').lower()
+        if keuzeSmaak != 'a' and keuzeSmaak != 'c' and keuzeSmaak != 'v':
             x -= 1
-            print('Sorry dat snap ik niet... ')
+            print('Sorry dat is geen optie die we aanbieden...')
 
 def hoornBak(keuze):
     if keuze == 'a':
@@ -102,7 +102,7 @@ def stap2(aantalBollen):
         stap3(keuze, aantalBollen)
         hoornBak(keuze)
     else:
-        print('Sorry dat snap ik niet... ')
+        print('Sorry dat is geen optie die we aanbieden...')
         stap2(aantalBollen)     
 
 def topping(keuze, aantalBollen):
@@ -112,7 +112,7 @@ def topping(keuze, aantalBollen):
             
 
 def bon(aantalBollen, aantalBakjes, aantalHoorntjes, keuze, topping):
-    prijsBolletjes = float(1.10)
+    prijsBolletjes = float(0.95)
     prijsHorrentje = float(1.25)
     prijsBakjes = float(0.75)
     prijsSlagroom = float(0.50)
@@ -162,7 +162,7 @@ def stap3(keuze, aantalBollen):
         bon(aantalBollen, aantalBakjes, aantalHoorntjes, keuze, topping)
         print('\nBedankt en tot ziens!\n')
     else:
-        print('Sorry dat snap ik niet...')
+        print('Sorry dat is geen optie die we aanbieden...')
         stap3(keuze, aantalBollen)
 
 soortKlant()
